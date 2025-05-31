@@ -28,6 +28,9 @@ img {
   padding: 20px;
   min-height: 100vh;
   box-sizing: border-box;
+  border: 4px solid #00bfff44;
+  box-shadow: 0 0 25px #00bfff66;
+  margin: 0 auto;
 }
 
 .hidden {
@@ -67,7 +70,11 @@ button.choice:hover, .glow-btn:hover {
   margin-right: 10px;
 }
 
-#music-toggle {
+.next-centered {
+  margin-top: 30px;
+}
+
+.music-toggle {
   position: fixed;
   bottom: 12px;
   right: 12px;

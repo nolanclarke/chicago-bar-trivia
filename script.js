@@ -38,7 +38,7 @@ let score = 0;
 let shuffledBars = [];
 let musicPlaying = true;
 let musicPlayer = null;
-let currentTrack = 'https://api.soundcloud.com/tracks/2086033833'; // Set once and keep
+let currentTrack = 'https://api.soundcloud.com/tracks/2086033833';
 
 function shuffleArray(arr) {
   return arr.slice().sort(() => Math.random() - 0.5);
@@ -118,7 +118,7 @@ function playMusic() {
   musicPlayer.id = "music-player";
   document.body.appendChild(musicPlayer);
   musicPlaying = true;
-  document.getElementById("music-toggle").textContent = "🔊 Music Off";
+  document.getElementById("music-toggle").textContent = "Music Off";
 }
 
 document.getElementById("start-btn").addEventListener("click", () => {
@@ -133,7 +133,7 @@ document.getElementById("music-toggle").addEventListener("click", () => {
   if (musicPlaying) {
     document.getElementById("music-player")?.remove();
     musicPlaying = false;
-    btn.textContent = "🔇 Music On";
+    btn.textContent = "Music On";
   } else {
     playMusic();
   }
