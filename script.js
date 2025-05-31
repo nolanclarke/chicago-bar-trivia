@@ -1,28 +1,28 @@
 const bars = [
   {
     name: "Slippery Slope",
-    image: "https://via.placeholder.com/300x200?text=Slippery+Slope",
+    image: "images/slippery-slope.jpg",
     hours: "Open till 2AM daily",
     specials: "$5 High Noons every Tuesday",
     website: "https://slipperyslopechicago.com"
   },
   {
     name: "Estelle's",
-    image: "https://via.placeholder.com/300x200?text=Estelle's",
+    image: "images/estelles.jpg",
     hours: "Open till 4AM weekends",
     specials: "$3 PBR + shot combo",
     website: "https://estelleschicago.com"
   },
   {
     name: "Smart Bar",
-    image: "https://via.placeholder.com/300x200?text=Smart+Bar",
+    image: "images/smartbar.jpg",
     hours: "Open 10PM–4AM",
     specials: "Half-price cover before 11PM",
     website: "https://smartbarchicago.com"
   },
   {
     name: "The Violet Hour",
-    image: "https://via.placeholder.com/300x200?text=The+Violet+Hour",
+    image: "images/the-violet-hour.jpg",
     hours: "Open 5PM–2AM",
     specials: "$10 signature cocktails on Mondays",
     website: "https://theviolethour.com"
