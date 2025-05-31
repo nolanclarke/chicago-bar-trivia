@@ -36,15 +36,18 @@ const bars = [
 let currentQuestion = 0;
 let score = 0;
 let shuffledBars = [];
+let musicPlaying = true;
+let musicPlayer = null;
 
 function shuffleArray(arr) {
   return arr.slice().sort(() => Math.random() - 0.5);
 }
 
 function showQuestion() {
-  document.getElementById("trivia-card").classList.remove("hidden");
+  document.getElementById("trivia-card")?.classList?.add("hidden");
   document.getElementById("result-screen").classList.add("hidden");
   document.getElementById("final-screen").classList.add("hidden");
+  document.getElementById("main-content").classList.remove("hidden");
   document.getElementById("question-counter").textContent = `${currentQuestion + 1}/5`;
 
   const correctBar = shuffledBars[currentQuestion];
@@ -65,7 +68,7 @@ function showQuestion() {
 }
 
 function handleAnswer(isCorrect, bar) {
-  document.getElementById("trivia-card").classList.add("hidden");
+  document.getElementById("main-content").classList.add("hidden");
   document.getElementById("result-screen").classList.remove("hidden");
 
   document.getElementById("result-msg").textContent = isCorrect ? "Correct!" : "Incorrect!";
@@ -77,8 +80,6 @@ function handleAnswer(isCorrect, bar) {
   document.getElementById("bar-link").href = bar.link;
 
   if (isCorrect) score++;
-
-  document.getElementById("next-btn").classList.remove("hidden");
 }
 
 function nextQuestion() {
@@ -91,7 +92,7 @@ function nextQuestion() {
 }
 
 function showFinalScreen() {
-  document.getElementById("trivia-card").classList.add("hidden");
+  document.getElementById("main-content").classList.add("hidden");
   document.getElementById("result-screen").classList.add("hidden");
   document.getElementById("question-counter").classList.add("hidden");
   document.getElementById("final-screen").classList.remove("hidden");
@@ -102,53 +103,41 @@ function resetGame() {
   shuffledBars = shuffleArray(bars).slice(0, 5);
   currentQuestion = 0;
   score = 0;
+  document.getElementById("start-screen").classList.add("hidden");
+  document.getElementById("main-content").classList.remove("hidden");
   document.getElementById("question-counter").classList.remove("hidden");
   showQuestion();
 }
 
-// START BUTTON
 document.getElementById("start-btn").addEventListener("click", () => {
-  document.getElementById("start-screen").classList.add("hidden");
+  playMusic();
   resetGame();
 });
 
-// NEXT BUTTON
 document.getElementById("next-btn").addEventListener("click", nextQuestion);
-
-// MUSIC PLAYER SETUP
-const tracks = [
-  'https://api.soundcloud.com/tracks/2086033833', // Eat the Sun
-  'https://api.soundcloud.com/tracks/2083466883', // High (On the Dance Floor)
-  'https://api.soundcloud.com/tracks/2068036764', // HASM FANR
-  'https://api.soundcloud.com/tracks/2061421784'  // Checks On Deck
-];
-
-const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
-const musicPlayer = document.createElement("iframe");
-musicPlayer.src = `https://w.soundcloud.com/player/?url=${randomTrack}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&loop=true&single_active=true`;
-musicPlayer.style.display = "none";
-musicPlayer.allow = "autoplay";
-musicPlayer.id = "music-player";
-document.body.appendChild(musicPlayer);
-
-// Music toggle button
-const toggleBtn = document.createElement("button");
-toggleBtn.textContent = "🔊 Music On/Off";
-toggleBtn.classList.add("glow-btn");
-toggleBtn.style.position = "fixed";
-toggleBtn.style.bottom = "10px";
-toggleBtn.style.right = "10px";
-toggleBtn.style.zIndex = "9999";
-document.body.appendChild(toggleBtn);
-
-let musicPlaying = true;
-
-toggleBtn.onclick = () => {
-  if (musicPlaying) {
-    musicPlayer.src = "";
-    musicPlaying = false;
-  } else {
-    musicPlayer.src = `https://w.soundcloud.com/player/?url=${randomTrack}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&loop=true&single_active=true`;
-    musicPlaying = true;
+document.getElementById("music-toggle").addEventListener("click", () => {
+  if (musicPlayer) {
+    if (musicPlaying) {
+      musicPlayer.remove();
+      musicPlaying = false;
+    } else {
+      playMusic();
+    }
   }
-};
+});
+
+function playMusic() {
+  const tracks = [
+    'https://api.soundcloud.com/tracks/2086033833',
+    'https://api.soundcloud.com/tracks/2083466883',
+    'https://api.soundcloud.com/tracks/2068036764',
+    'https://api.soundcloud.com/tracks/2061421784'
+  ];
+  const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
+  musicPlayer = document.createElement("iframe");
+  musicPlayer.src = `https://w.soundcloud.com/player/?url=${randomTrack}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&loop=true`;
+  musicPlayer.allow = "autoplay";
+  musicPlayer.style.display = "none";
+  document.body.appendChild(musicPlayer);
+  musicPlaying = true;
+}
