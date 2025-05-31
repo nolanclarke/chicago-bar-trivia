@@ -13,6 +13,21 @@
 
     <div id="trivia-card">
       <img id="bar-image" src="" alt="Bar image" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chicago Bar Trivia 🍺</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game">
+    <h2>Chicago Bar Trivia 🍺</h2>
+    <div id="question-counter" style="text-align: right; font-size: 14px;">1/5</div>
+
+    <div id="trivia-card">
+      <img id="bar-image" src="" alt="Bar image" />
       <div class="choices"></div>
     </div>
 
@@ -23,16 +38,18 @@
       <p id="bar-hours"></p>
       <p id="bar-specials"></p>
       <a id="bar-link" href="#" target="_blank">Visit Website</a>
+      <button id="next-btn" onclick="nextQuestion()">Next Question</button>
     </div>
 
     <div id="final-screen" class="hidden">
-    <h2>Game Over!</h2>
-     <p id="score-text" style="font-size: 22px; margin-top: 10px;"></p>
-     <button onclick="resetGame()">Play Again</button>
-    <p style="margin-top: 24px; font-size: 14px; color: #aaa;">
-    Want your bar featured?<br />
-    Email <a href="mailto:nkc724@gmail.com" style="color: #4fd1c5;">nkc724@gmail.com</a>
-    </p>
+      <h2>Chicago Bar Trivia 🍺</h2>
+      <img src="images/chicago-skyline.jpg" alt="Chicago skyline" style="width: 100%; border-radius: 8px; margin: 16px 0;">
+      <p id="score-text" style="font-size: 22px; margin-top: 10px;"></p>
+      <button onclick="resetGame()">Play Again</button>
+      <p style="margin-top: 24px; font-size: 14px; color: #aaa;">
+        Want your bar featured?<br />
+        Email <a href="mailto:nkc724@gmail.com" style="color: #4fd1c5;">nkc724@gmail.com</a>
+      </p>
     </div>
   </div>
 
