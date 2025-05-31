@@ -38,16 +38,16 @@ let score = 0;
 let shuffledBars = [];
 let musicPlaying = true;
 let musicPlayer = null;
+let currentTrack = 'https://api.soundcloud.com/tracks/2086033833'; // Set once and keep
 
 function shuffleArray(arr) {
   return arr.slice().sort(() => Math.random() - 0.5);
 }
 
 function showQuestion() {
-  document.getElementById("trivia-card")?.classList?.add("hidden");
+  document.getElementById("main-content").classList.remove("hidden");
   document.getElementById("result-screen").classList.add("hidden");
   document.getElementById("final-screen").classList.add("hidden");
-  document.getElementById("main-content").classList.remove("hidden");
   document.getElementById("question-counter").textContent = `${currentQuestion + 1}/5`;
 
   const correctBar = shuffledBars[currentQuestion];
@@ -106,7 +106,19 @@ function resetGame() {
   document.getElementById("start-screen").classList.add("hidden");
   document.getElementById("main-content").classList.remove("hidden");
   document.getElementById("question-counter").classList.remove("hidden");
+  document.getElementById("music-toggle").classList.remove("hidden");
   showQuestion();
+}
+
+function playMusic() {
+  musicPlayer = document.createElement("iframe");
+  musicPlayer.src = `https://w.soundcloud.com/player/?url=${currentTrack}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&loop=true`;
+  musicPlayer.allow = "autoplay";
+  musicPlayer.style.display = "none";
+  musicPlayer.id = "music-player";
+  document.body.appendChild(musicPlayer);
+  musicPlaying = true;
+  document.getElementById("music-toggle").textContent = "🔊 Music Off";
 }
 
 document.getElementById("start-btn").addEventListener("click", () => {
@@ -115,29 +127,14 @@ document.getElementById("start-btn").addEventListener("click", () => {
 });
 
 document.getElementById("next-btn").addEventListener("click", nextQuestion);
+
 document.getElementById("music-toggle").addEventListener("click", () => {
-  if (musicPlayer) {
-    if (musicPlaying) {
-      musicPlayer.remove();
-      musicPlaying = false;
-    } else {
-      playMusic();
-    }
+  const btn = document.getElementById("music-toggle");
+  if (musicPlaying) {
+    document.getElementById("music-player")?.remove();
+    musicPlaying = false;
+    btn.textContent = "🔇 Music On";
+  } else {
+    playMusic();
   }
 });
-
-function playMusic() {
-  const tracks = [
-    'https://api.soundcloud.com/tracks/2086033833',
-    'https://api.soundcloud.com/tracks/2083466883',
-    'https://api.soundcloud.com/tracks/2068036764',
-    'https://api.soundcloud.com/tracks/2061421784'
-  ];
-  const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
-  musicPlayer = document.createElement("iframe");
-  musicPlayer.src = `https://w.soundcloud.com/player/?url=${randomTrack}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&loop=true`;
-  musicPlayer.allow = "autoplay";
-  musicPlayer.style.display = "none";
-  document.body.appendChild(musicPlayer);
-  musicPlaying = true;
-}
