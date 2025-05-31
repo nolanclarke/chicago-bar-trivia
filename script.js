@@ -32,7 +32,7 @@ const bars = [
 function getRandomBarOptions() {
   const correct = bars[Math.floor(Math.random() * bars.length)];
   const others = bars.filter(b => b.name !== correct.name);
-  const options = [correct.name, ...others.sort(() => 0.5 - Math.random()).slice(0, 3)];
+  const options = [correct.name, ...others.sort(() => 0.5 - Math.random()).slice(0, 3).map(b => b.name)];
   return {
     correct,
     options: options.sort(() => 0.5 - Math.random())
@@ -41,30 +41,37 @@ function getRandomBarOptions() {
 
 function loadBarTrivia() {
   const { correct, options } = getRandomBarOptions();
+
+  // Setup trivia view
+  document.getElementById("trivia-card").classList.remove("hidden");
+  document.getElementById("result-screen").classList.add("hidden");
+
   document.getElementById("bar-image").src = correct.image;
-  document.getElementById("bar-name").textContent = correct.name;
-  document.querySelector("#reveal p:nth-of-type(1)").textContent = `🕒 ${correct.hours}`;
-  document.querySelector("#reveal p:nth-of-type(2)").textContent = `🍻 ${correct.specials}`;
-  document.querySelector("#reveal a").href = correct.website;
 
   const choiceContainer = document.querySelector(".choices");
   choiceContainer.innerHTML = "";
-  document.getElementById("reveal").classList.add("hidden");
 
   options.forEach(option => {
     const btn = document.createElement("button");
     btn.className = "choice";
     btn.textContent = option;
     btn.onclick = () => {
-      document.getElementById("reveal").classList.remove("hidden");
-      if (option === correct.name) {
-        btn.style.backgroundColor = "green";
-      } else {
-        btn.style.backgroundColor = "red";
-      }
+      showResult(option === correct.name, correct);
     };
     choiceContainer.appendChild(btn);
   });
+}
+
+function showResult(isCorrect, bar) {
+  document.getElementById("trivia-card").classList.add("hidden");
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  document.getElementById("result-msg").textContent = isCorrect ? "✅ Correct!" : "❌ Wrong...";
+  document.getElementById("bar-name").textContent = bar.name;
+  document.getElementById("bar-hours").textContent = `🕒 ${bar.hours}`;
+  document.getElementById("bar-specials").textContent = `🍻 ${bar.specials}`;
+  document.getElementById("bar-link").href = bar.website;
+  document.getElementById("result-image").src = bar.image;
 }
 
 window.onload = loadBarTrivia;

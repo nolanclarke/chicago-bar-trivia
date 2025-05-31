@@ -9,17 +9,20 @@
 <body>
   <div id="game">
     <h2>Chicago Bar Trivia</h2>
-    <div id="question">
+
+    <div id="trivia-card">
       <img id="bar-image" src="" alt="Chicago bar" />
       <p>Which Chicago bar is this?</p>
       <div class="choices"></div>
     </div>
 
-    <div id="reveal" class="hidden">
-      <h3>This bar is <span id="bar-name"></span></h3>
-      <p>🕒 Bar hours here</p>
-      <p>🍻 Bar specials here</p>
-      <a href="#" target="_blank">Visit Website</a>
+    <div id="result-screen" class="hidden">
+      <img id="result-image" src="" alt="Chicago bar" />
+      <h3 id="result-msg">This bar is...</h3>
+      <h2 id="bar-name"></h2>
+      <p id="bar-hours">🕒 Bar hours</p>
+      <p id="bar-specials">🍻 Bar specials</p>
+      <a id="bar-link" href="#" target="_blank">Visit Website</a>
     </div>
   </div>
 
