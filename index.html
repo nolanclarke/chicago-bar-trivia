@@ -7,9 +7,28 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="app">
-    <!-- Trivia UI goes here -->
+  <div id="game">
+    <h2>Chicago Bar Trivia</h2>
+    <div id="question">
+      <img id="bar-image" src="https://via.placeholder.com/300x200" alt="Chicago bar" />
+      <p>Which Chicago bar is this?</p>
+      <div class="choices">
+        <button class="choice">Slippery Slope</button>
+        <button class="choice">Smart Bar</button>
+        <button class="choice">Estelle's</button>
+      </div>
+    </div>
+
+    <div id="reveal" class="hidden">
+      <h3>This bar is <span id="bar-name">Slippery Slope</span></h3>
+      <p>🕒 Open till 2AM daily</p>
+      <p>🍻 $5 High Noons every Tuesday</p>
+      <a href="https://slipperyslopechicago.com" target="_blank">Visit Website</a>
+    </div>
+
+    <button id="reveal-btn">Reveal Answer</button>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,36 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  margin: 20px;
+  background: #f8f8f8;
+}
+
+#bar-image {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.choices {
+  margin-top: 10px;
+}
+
+.choice {
+  display: block;
+  width: 80%;
+  margin: 8px auto;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #eee;
+  cursor: pointer;
+}
+
+#reveal {
+  margin-top: 20px;
+}
+
+.hidden {
+  display: none;
+}
