@@ -17,7 +17,8 @@
 
   <div id="main-content" class="outer-wrapper hidden">
     <div class="card">
-      <div id="question-counter" class="corner-text">1/5</div>
+      <h1>Chicago Bar Trivia 🍺</h1>
+      <div class="progress-bar"><div id="progress-fill"></div></div>
       <img id="bar-image" src="" alt="Bar Image" class="bar-img" />
       <div class="choices"></div>
     </div>
@@ -25,6 +26,8 @@
 
   <div id="result-screen" class="outer-wrapper hidden">
     <div class="card">
+      <h1>Chicago Bar Trivia 🍺</h1>
+      <div class="progress-bar"><div id="progress-fill-result"></div></div>
       <img id="result-image" src="" alt="Result Image" class="bar-img" />
       <h2 id="result-msg">Correct!</h2>
       <p id="bar-name"></p>
@@ -32,9 +35,27 @@
       <p id="bar-hours"></p>
       <p id="bar-specials"></p>
       <a id="bar-link" href="" target="_blank">View Website</a>
-      <button id="next-btn" class="glow-btn next-centered">Next Question</button>
+      <div class="next-button-wrapper">
+        <button id="next-btn" class="glow-btn">Next Question</button>
+      </div>
     </div>
   </div>
+
+  <div id="final-screen" class="outer-wrapper hidden">
+    <div class="card">
+      <img src="images/chicago-skyline.jpg" alt="Skyline" class="skyline-img" />
+      <h2>Game Over</h2>
+      <p id="score-text"></p>
+      <p>Contact <a href="mailto:nkc724@gmail.com">nkc724@gmail.com</a> to feature your bar.</p>
+      <p>Music by <a href="http://soundcloud.com/evandestefano" target="_blank">Evan</a></p>
+      <button class="glow-btn" onclick="resetGame()">Play Again</button>
+    </div>
+  </div>
+
+  <button id="music-toggle" class="glow-btn music-toggle hidden">Music Off</button>
+  <script src="script.js"></script>
+</body>
+</html>
 
   <div id="final-screen" class="outer-wrapper hidden">
     <div class="card">

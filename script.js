@@ -44,11 +44,16 @@ function shuffleArray(arr) {
   return arr.slice().sort(() => Math.random() - 0.5);
 }
 
+function updateProgress() {
+  const percent = ((currentQuestion) / 5) * 100;
+  document.getElementById("progress-fill").style.width = `${percent}%`;
+  document.getElementById("progress-fill-result").style.width = `${percent}%`;
+}
+
 function showQuestion() {
   document.getElementById("main-content").classList.remove("hidden");
   document.getElementById("result-screen").classList.add("hidden");
   document.getElementById("final-screen").classList.add("hidden");
-  document.getElementById("question-counter").textContent = `${currentQuestion + 1}/5`;
 
   const correctBar = shuffledBars[currentQuestion];
   const otherBars = bars.filter(bar => bar.name !== correctBar.name);
@@ -65,6 +70,8 @@ function showQuestion() {
     btn.onclick = () => handleAnswer(choice.name === correctBar.name, correctBar);
     choicesContainer.appendChild(btn);
   });
+
+  updateProgress();
 }
 
 function handleAnswer(isCorrect, bar) {
@@ -80,6 +87,7 @@ function handleAnswer(isCorrect, bar) {
   document.getElementById("bar-link").href = bar.link;
 
   if (isCorrect) score++;
+  updateProgress();
 }
 
 function nextQuestion() {
@@ -94,7 +102,6 @@ function nextQuestion() {
 function showFinalScreen() {
   document.getElementById("main-content").classList.add("hidden");
   document.getElementById("result-screen").classList.add("hidden");
-  document.getElementById("question-counter").classList.add("hidden");
   document.getElementById("final-screen").classList.remove("hidden");
   document.getElementById("score-text").textContent = `You got ${score}/5 right!`;
 }
@@ -105,8 +112,8 @@ function resetGame() {
   score = 0;
   document.getElementById("start-screen").classList.add("hidden");
   document.getElementById("main-content").classList.remove("hidden");
-  document.getElementById("question-counter").classList.remove("hidden");
   document.getElementById("music-toggle").classList.remove("hidden");
+  updateProgress();
   showQuestion();
 }
 
