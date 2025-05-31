@@ -107,3 +107,21 @@ function resetGame() {
 }
 
 resetGame();
+
+// SOUNDTRACK EMBED
+const tracks = [
+  'https://api.soundcloud.com/tracks/2086033833', // Eat the Sun
+  'https://api.soundcloud.com/tracks/2083466883', // High (On the Dance Floor)
+  'https://api.soundcloud.com/tracks/2068036764', // HASM FANR
+  'https://api.soundcloud.com/tracks/2061421784'  // Checks On Deck
+];
+
+const randomTrack = tracks[Math.floor(Math.random() * tracks.length)];
+
+const audioPlayer = document.createElement("iframe");
+audioPlayer.src = `https://w.soundcloud.com/player/?url=${randomTrack}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&loop=true`;
+audioPlayer.width = "0";
+audioPlayer.height = "0";
+audioPlayer.allow = "autoplay";
+audioPlayer.frameBorder = "no";
+document.body.appendChild(audioPlayer);
