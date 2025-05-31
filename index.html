@@ -8,21 +8,31 @@
 </head>
 <body>
   <div id="game">
-    <h2>Chicago Bar Trivia</h2>
+    <h2>Guess the Chicago Bar</h2>
+    <div id="question-counter" style="text-align: right; font-size: 14px;">1/5</div>
 
     <div id="trivia-card">
-      <img id="bar-image" src="" alt="Chicago bar" />
-      <p>Which Chicago bar is this?</p>
+      <img id="bar-image" src="" alt="Bar image" />
       <div class="choices"></div>
     </div>
 
     <div id="result-screen" class="hidden">
-      <img id="result-image" src="" alt="Chicago bar" />
-      <h3 id="result-msg">This bar is...</h3>
-      <h2 id="bar-name"></h2>
-      <p id="bar-hours">🕒 Bar hours</p>
-      <p id="bar-specials">🍻 Bar specials</p>
+      <h3 id="result-msg"></h3>
+      <img id="result-image" src="" alt="Bar image" />
+      <p id="bar-name"></p>
+      <p id="bar-hours"></p>
+      <p id="bar-specials"></p>
       <a id="bar-link" href="#" target="_blank">Visit Website</a>
+    </div>
+
+    <div id="final-screen" class="hidden">
+    <h2>Game Over!</h2>
+     <p id="score-text" style="font-size: 22px; margin-top: 10px;"></p>
+     <button onclick="resetGame()">Play Again</button>
+    <p style="margin-top: 24px; font-size: 14px; color: #aaa;">
+    Want your bar featured?<br />
+    Email <a href="mailto:nkc724@gmail.com" style="color: #4fd1c5;">nkc724@gmail.com</a>
+    </p>
     </div>
   </div>
 

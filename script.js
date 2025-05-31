@@ -29,24 +29,31 @@ const bars = [
   }
 ];
 
+let currentQuestion = 0;
+let score = 0;
+let correctBar = null;
+
 function getRandomBarOptions() {
-  const correct = bars[Math.floor(Math.random() * bars.length)];
-  const others = bars.filter(b => b.name !== correct.name);
-  const options = [correct.name, ...others.sort(() => 0.5 - Math.random()).slice(0, 3).map(b => b.name)];
-  return {
-    correct,
-    options: options.sort(() => 0.5 - Math.random())
-  };
+  correctBar = bars[Math.floor(Math.random() * bars.length)];
+  const others = bars.filter(b => b.name !== correctBar.name);
+  const options = [correctBar.name, ...others.sort(() => 0.5 - Math.random()).slice(0, 3).map(b => b.name)];
+  return options.sort(() => 0.5 - Math.random());
 }
 
 function loadBarTrivia() {
-  const { correct, options } = getRandomBarOptions();
+  if (currentQuestion >= 5) {
+    showFinalScore();
+    return;
+  }
 
-  // Setup trivia view
   document.getElementById("trivia-card").classList.remove("hidden");
   document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("final-screen").classList.add("hidden");
 
-  document.getElementById("bar-image").src = correct.image;
+  const options = getRandomBarOptions();
+
+  document.getElementById("bar-image").src = correctBar.image;
+  document.getElementById("question-counter").textContent = `${currentQuestion + 1}/5`;
 
   const choiceContainer = document.querySelector(".choices");
   choiceContainer.innerHTML = "";
@@ -56,22 +63,48 @@ function loadBarTrivia() {
     btn.className = "choice";
     btn.textContent = option;
     btn.onclick = () => {
-      showResult(option === correct.name, correct);
+      showResult(option === correctBar.name);
     };
     choiceContainer.appendChild(btn);
   });
 }
 
-function showResult(isCorrect, bar) {
+function showResult(isCorrect) {
   document.getElementById("trivia-card").classList.add("hidden");
   document.getElementById("result-screen").classList.remove("hidden");
 
-  document.getElementById("result-msg").textContent = isCorrect ? "✅ Correct!" : "❌ Wrong...";
-  document.getElementById("bar-name").textContent = bar.name;
-  document.getElementById("bar-hours").textContent = `🕒 ${bar.hours}`;
-  document.getElementById("bar-specials").textContent = `🍻 ${bar.specials}`;
-  document.getElementById("bar-link").href = bar.website;
-  document.getElementById("result-image").src = bar.image;
+  if (isCorrect) {
+    score++;
+    document.getElementById("result-msg").textContent = "✅ Correct!";
+  } else {
+    document.getElementById("result-msg").textContent = "❌ Wrong...";
+  }
+
+  document.getElementById("bar-name").textContent = correctBar.name;
+  document.getElementById("bar-hours").textContent = `🕒 ${correctBar.hours}`;
+  document.getElementById("bar-specials").textContent = `🍻 ${correctBar.specials}`;
+  document.getElementById("bar-link").href = correctBar.website;
+  document.getElementById("result-image").src = correctBar.image;
+
+  currentQuestion++;
+
+  setTimeout(() => {
+    loadBarTrivia();
+  }, 2000);
+}
+
+function showFinalScore() {
+  document.getElementById("trivia-card").classList.add("hidden");
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("final-screen").classList.remove("hidden");
+
+  document.getElementById("score-text").textContent = `You got ${score}/5 right!`;
+}
+
+function resetGame() {
+  currentQuestion = 0;
+  score = 0;
+  loadBarTrivia();
 }
 
 window.onload = loadBarTrivia;
