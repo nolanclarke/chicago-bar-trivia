@@ -2,40 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chicago Bar Trivia 🍺</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="start-screen">
-    <img src="images/skyline.jpg" alt="Chicago Skyline" class="start-image" />
-    <button id="start-btn">Start Game</button>
+  <div id="start-screen" class="screen">
+    <h1>Chicago Bar Trivia 🍺</h1>
+    <img src="images/chicago-skyline.jpg" alt="Chicago Skyline" class="skyline-img">
+    <button id="start-btn" class="glow-btn">Start Game</button>
   </div>
 
-  <div id="game-container" class="hidden">
-    <div id="question-counter">1/5</div>
+  <div id="trivia-card" class="screen hidden">
+    <div id="question-counter" class="corner-text">1/5</div>
+    <img id="bar-image" src="" alt="Bar Image" />
+    <div class="choices"></div>
+  </div>
 
-    <div id="trivia-card" class="card hidden">
-      <img id="bar-image" src="" alt="Bar Image" />
-      <div class="choices"></div>
-    </div>
+  <div id="result-screen" class="screen hidden">
+    <img id="result-image" src="" alt="Result Image" />
+    <h2 id="result-msg">Correct!</h2>
+    <p id="bar-name"></p>
+    <p id="bar-neighborhood"></p>
+    <p id="bar-hours"></p>
+    <p id="bar-specials"></p>
+    <a id="bar-link" href="" target="_blank">View Website</a>
+    <button id="next-btn" class="glow-btn">Next Question</button>
+  </div>
 
-    <div id="result-screen" class="card hidden">
-      <h2 id="result-msg"></h2>
-      <img id="result-image" src="" alt="Bar Image" />
-      <h3 id="bar-name"></h3>
-      <p id="bar-neighborhood"></p>
-      <p id="bar-hours"></p>
-      <p id="bar-specials"></p>
-      <a id="bar-link" href="#" target="_blank">View Website</a>
-      <button id="next-btn" onclick="nextQuestion()">Next Question</button>
-    </div>
-
-    <div id="final-screen" class="card hidden">
-      <h2 id="score-text"></h2>
-      <p>Contact <a href="mailto:nkc724@gmail.com">nkc724@gmail.com</a> to feature your bar!</p>
-      <button onclick="resetGame()">Play Again</button>
-    </div>
+  <div id="final-screen" class="screen hidden">
+    <img src="images/chicago-skyline.jpg" alt="Skyline" class="skyline-img" />
+    <h2>Game Over</h2>
+    <p id="score-text"></p>
+    <p>Contact <a href="mailto:nkc724@gmail.com">nkc724@gmail.com</a> to feature your bar.</p>
+    <button class="glow-btn" onclick="resetGame()">Play Again</button>
   </div>
 
   <script src="script.js"></script>
