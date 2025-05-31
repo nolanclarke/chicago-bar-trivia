@@ -7,36 +7,44 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="start-screen" class="screen">
-    <h1>Chicago Bar Trivia 🍺</h1>
-    <img src="images/chicago-skyline.jpg" alt="Chicago Skyline" class="skyline-img">
-    <button id="start-btn" class="glow-btn">Start Game</button>
+  <div id="start-screen" class="outer-wrapper">
+    <div class="card">
+      <h1>Chicago Bar Trivia 🍺</h1>
+      <img src="images/chicago-skyline.jpg" alt="Chicago Skyline" class="skyline-img">
+      <button id="start-btn" class="glow-btn">Start Game</button>
+    </div>
   </div>
 
-  <div id="main-content" class="screen hidden">
-    <div id="question-counter" class="corner-text">1/5</div>
-    <img id="bar-image" src="" alt="Bar Image" class="bar-img" />
-    <div class="choices"></div>
+  <div id="main-content" class="outer-wrapper hidden">
+    <div class="card">
+      <div id="question-counter" class="corner-text">1/5</div>
+      <img id="bar-image" src="" alt="Bar Image" class="bar-img" />
+      <div class="choices"></div>
+    </div>
   </div>
 
-  <div id="result-screen" class="screen hidden">
-    <img id="result-image" src="" alt="Result Image" class="bar-img" />
-    <h2 id="result-msg">Correct!</h2>
-    <p id="bar-name"></p>
-    <p id="bar-neighborhood"></p>
-    <p id="bar-hours"></p>
-    <p id="bar-specials"></p>
-    <a id="bar-link" href="" target="_blank">View Website</a>
-    <button id="next-btn" class="glow-btn next-centered">Next Question</button>
+  <div id="result-screen" class="outer-wrapper hidden">
+    <div class="card">
+      <img id="result-image" src="" alt="Result Image" class="bar-img" />
+      <h2 id="result-msg">Correct!</h2>
+      <p id="bar-name"></p>
+      <p id="bar-neighborhood"></p>
+      <p id="bar-hours"></p>
+      <p id="bar-specials"></p>
+      <a id="bar-link" href="" target="_blank">View Website</a>
+      <button id="next-btn" class="glow-btn next-centered">Next Question</button>
+    </div>
   </div>
 
-  <div id="final-screen" class="screen hidden">
-    <img src="images/chicago-skyline.jpg" alt="Skyline" class="skyline-img" />
-    <h2>Game Over</h2>
-    <p id="score-text"></p>
-    <p>Contact <a href="mailto:nkc724@gmail.com">nkc724@gmail.com</a> to feature your bar.</p>
-    <p>Music by <a href="http://soundcloud.com/evandestefano" target="_blank">Evan</a></p>
-    <button class="glow-btn" onclick="resetGame()">Play Again</button>
+  <div id="final-screen" class="outer-wrapper hidden">
+    <div class="card">
+      <img src="images/chicago-skyline.jpg" alt="Skyline" class="skyline-img" />
+      <h2>Game Over</h2>
+      <p id="score-text"></p>
+      <p>Contact <a href="mailto:nkc724@gmail.com">nkc724@gmail.com</a> to feature your bar.</p>
+      <p>Music by <a href="http://soundcloud.com/evandestefano" target="_blank">Evan</a></p>
+      <button class="glow-btn" onclick="resetGame()">Play Again</button>
+    </div>
   </div>
 
   <button id="music-toggle" class="glow-btn music-toggle hidden">Music Off</button>
