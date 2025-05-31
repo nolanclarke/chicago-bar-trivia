@@ -2,6 +2,7 @@ const bars = [
   {
     name: "Slippery Slope",
     image: "images/slippery-slope.jpg",
+    neighborhood: "Wicker Park",
     hours: "Open till 2AM Daily",
     specials: "$5 High Noons, $6 Tequila Shots",
     link: "https://www.slipperyslope.com"
@@ -9,6 +10,7 @@ const bars = [
   {
     name: "Smart Bar",
     image: "images/smartbar.jpg",
+    neighborhood: "Lakeview",
     hours: "10PM - 4AM (5AM Sat)",
     specials: "Underground house music, $8 cover",
     link: "https://www.smartbarchicago.com"
@@ -16,6 +18,7 @@ const bars = [
   {
     name: "The Violet Hour",
     image: "images/the-violet-hour.jpg",
+    neighborhood: "Wicker Park",
     hours: "5PM - Midnight",
     specials: "Award-winning cocktails, upscale vibes",
     link: "https://www.theviolethour.com"
@@ -23,6 +26,7 @@ const bars = [
   {
     name: "Estelle's",
     image: "images/estelles.jpg",
+    neighborhood: "Wicker Park",
     hours: "Open till 4AM",
     specials: "$6 Beer + Shot Combo, Pool Table",
     link: "https://www.estelleschicago.com"
@@ -67,6 +71,7 @@ function handleAnswer(isCorrect, bar) {
   document.getElementById("result-msg").textContent = isCorrect ? "Correct!" : "Incorrect!";
   document.getElementById("result-image").src = bar.image;
   document.getElementById("bar-name").textContent = bar.name;
+  document.getElementById("bar-neighborhood").textContent = `📍 ${bar.neighborhood}`;
   document.getElementById("bar-hours").textContent = bar.hours;
   document.getElementById("bar-specials").textContent = bar.specials;
   document.getElementById("bar-link").href = bar.link;
@@ -101,5 +106,4 @@ function resetGame() {
   showQuestion();
 }
 
-// Init
 resetGame();
