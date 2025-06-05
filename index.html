@@ -7,23 +7,28 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Start Screen -->
   <div id="start-screen" class="outer-wrapper">
     <div class="card">
       <h1>Chicago Bar Trivia 🍺</h1>
       <img src="images/chicago-skyline.jpg" alt="Chicago Skyline" class="skyline-img">
       <button id="start-btn" class="glow-btn">Start Game</button>
+      <button id="my-bars-btn" class="glow-btn">My Bars</button>
     </div>
   </div>
 
+  <!-- Main Game Screen -->
   <div id="main-content" class="outer-wrapper hidden">
     <div class="card">
       <h1>Chicago Bar Trivia 🍺</h1>
+      <p id="question-neighborhood"></p>
       <div class="progress-bar"><div id="progress-fill"></div></div>
       <img id="bar-image" src="" alt="Bar Image" class="bar-img" />
       <div class="choices"></div>
     </div>
   </div>
 
+  <!-- Result Screen -->
   <div id="result-screen" class="outer-wrapper hidden">
     <div class="card">
       <h1>Chicago Bar Trivia 🍺</h1>
@@ -34,41 +39,35 @@
       <p id="bar-neighborhood"></p>
       <p id="bar-hours"></p>
       <p id="bar-specials"></p>
+      <p id="bar-description"></p>
       <a id="bar-link" href="" target="_blank">View Website</a>
+      <button id="save-btn" class="glow-btn">Save This Bar</button>
       <div class="next-button-wrapper">
         <button id="next-btn" class="glow-btn">Next Question</button>
       </div>
     </div>
   </div>
 
+  <!-- Final Screen -->
   <div id="final-screen" class="outer-wrapper hidden">
     <div class="card">
       <img src="images/chicago-skyline.jpg" alt="Skyline" class="skyline-img" />
       <h2>Game Over</h2>
       <p id="score-text"></p>
       <p>Contact <a href="mailto:nkc724@gmail.com">nkc724@gmail.com</a> to feature your bar.</p>
-      <p>Music by <a href="http://soundcloud.com/evandestefano" target="_blank">Evan</a></p>
-      <button class="glow-btn" onclick="resetGame()">Play Again</button>
+      <button class="glow-btn" onclick="goToStart()">Back to Home</button>
     </div>
   </div>
 
-  <button id="music-toggle" class="glow-btn music-toggle hidden">Music Off</button>
-  <script src="script.js"></script>
-</body>
-</html>
-
-  <div id="final-screen" class="outer-wrapper hidden">
+  <!-- My Bars Screen -->
+  <div id="my-bars-screen" class="outer-wrapper hidden">
     <div class="card">
-      <img src="images/chicago-skyline.jpg" alt="Skyline" class="skyline-img" />
-      <h2>Game Over</h2>
-      <p id="score-text"></p>
-      <p>Contact <a href="mailto:nkc724@gmail.com">nkc724@gmail.com</a> to feature your bar.</p>
-      <p>Music by <a href="http://soundcloud.com/evandestefano" target="_blank">Evan</a></p>
-      <button class="glow-btn" onclick="resetGame()">Play Again</button>
+      <h2>My Saved Bars 🍻</h2>
+      <div id="saved-bars-list"></div>
+      <button class="glow-btn" id="back-home-btn">Back to Home</button>
     </div>
   </div>
 
-  <button id="music-toggle" class="glow-btn music-toggle hidden">Music Off</button>
   <script src="script.js"></script>
 </body>
 </html>

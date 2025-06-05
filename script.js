@@ -5,7 +5,8 @@ const bars = [
     neighborhood: "Wicker Park",
     hours: "Open till 2AM Daily",
     specials: "$5 High Noons, $6 Tequila Shots",
-    link: "https://www.slipperyslope.com"
+    link: "https://www.slipperyslope.com",
+    description: "Fun dance floor and great energy every night."
   },
   {
     name: "Smart Bar",
@@ -13,7 +14,8 @@ const bars = [
     neighborhood: "Lakeview",
     hours: "10PM - 4AM (5AM Sat)",
     specials: "Underground house music, $8 cover",
-    link: "https://www.smartbarchicago.com"
+    link: "https://www.smartbarchicago.com",
+    description: "Legendary electronic music spot beneath Metro."
   },
   {
     name: "The Violet Hour",
@@ -21,7 +23,8 @@ const bars = [
     neighborhood: "Wicker Park",
     hours: "5PM - Midnight",
     specials: "Award-winning cocktails, upscale vibes",
-    link: "https://www.theviolethour.com"
+    link: "https://www.theviolethour.com",
+    description: "Hidden entrance, speakeasy-style with fancy drinks."
   },
   {
     name: "Estelle's",
@@ -29,16 +32,14 @@ const bars = [
     neighborhood: "Wicker Park",
     hours: "Open till 4AM",
     specials: "$6 Beer + Shot Combo, Pool Table",
-    link: "https://www.estelleschicago.com"
+    link: "https://www.estelleschicago.com",
+    description: "Late-night classic with a chill crowd."
   }
 ];
 
 let currentQuestion = 0;
 let score = 0;
 let shuffledBars = [];
-let musicPlaying = true;
-let musicPlayer = null;
-let currentTrack = 'https://api.soundcloud.com/tracks/2086033833';
 
 function shuffleArray(arr) {
   return arr.slice().sort(() => Math.random() - 0.5);
@@ -54,6 +55,7 @@ function showQuestion() {
   document.getElementById("main-content").classList.remove("hidden");
   document.getElementById("result-screen").classList.add("hidden");
   document.getElementById("final-screen").classList.add("hidden");
+  document.getElementById("my-bars-screen").classList.add("hidden");
 
   const correctBar = shuffledBars[currentQuestion];
   const otherBars = bars.filter(bar => bar.name !== correctBar.name);
@@ -62,6 +64,7 @@ function showQuestion() {
   choicesContainer.innerHTML = "";
 
   document.getElementById("bar-image").src = correctBar.image;
+  document.getElementById("question-neighborhood").textContent = `📍 ${correctBar.neighborhood}`;
 
   choices.forEach(choice => {
     const btn = document.createElement("button");
@@ -84,7 +87,10 @@ function handleAnswer(isCorrect, bar) {
   document.getElementById("bar-neighborhood").textContent = `📍 ${bar.neighborhood}`;
   document.getElementById("bar-hours").textContent = bar.hours;
   document.getElementById("bar-specials").textContent = bar.specials;
+  document.getElementById("bar-description").textContent = bar.description;
   document.getElementById("bar-link").href = bar.link;
+
+  document.getElementById("save-btn").onclick = () => saveBar(bar.name);
 
   if (isCorrect) score++;
   updateProgress();
@@ -112,36 +118,55 @@ function resetGame() {
   score = 0;
   document.getElementById("start-screen").classList.add("hidden");
   document.getElementById("main-content").classList.remove("hidden");
-  document.getElementById("music-toggle").classList.remove("hidden");
   updateProgress();
   showQuestion();
 }
 
-function playMusic() {
-  musicPlayer = document.createElement("iframe");
-  musicPlayer.src = `https://w.soundcloud.com/player/?url=${currentTrack}&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&visual=false&loop=true`;
-  musicPlayer.allow = "autoplay";
-  musicPlayer.style.display = "none";
-  musicPlayer.id = "music-player";
-  document.body.appendChild(musicPlayer);
-  musicPlaying = true;
-  document.getElementById("music-toggle").textContent = "Music Off";
+function goToStart() {
+  document.getElementById("final-screen").classList.add("hidden");
+  document.getElementById("my-bars-screen").classList.add("hidden");
+  document.getElementById("start-screen").classList.remove("hidden");
 }
 
+// Save bar to localStorage
+function saveBar(barName) {
+  let saved = JSON.parse(localStorage.getItem("savedBars")) || [];
+  if (!saved.includes(barName)) {
+    saved.push(barName);
+    localStorage.setItem("savedBars", JSON.stringify(saved));
+  }
+}
+
+// Load My Bars list
+function loadSavedBars() {
+  const saved = JSON.parse(localStorage.getItem("savedBars")) || [];
+  const container = document.getElementById("saved-bars-list");
+  container.innerHTML = "";
+
+  saved.forEach(name => {
+    const bar = bars.find(b => b.name === name);
+    if (bar) {
+      const p = document.createElement("p");
+      p.innerHTML = `<strong>${bar.name}</strong><br>📍 ${bar.neighborhood}<br>${bar.description}`;
+      container.appendChild(p);
+    }
+  });
+}
+
+// Navigation
 document.getElementById("start-btn").addEventListener("click", () => {
-  playMusic();
   resetGame();
 });
 
 document.getElementById("next-btn").addEventListener("click", nextQuestion);
 
-document.getElementById("music-toggle").addEventListener("click", () => {
-  const btn = document.getElementById("music-toggle");
-  if (musicPlaying) {
-    document.getElementById("music-player")?.remove();
-    musicPlaying = false;
-    btn.textContent = "Music On";
-  } else {
-    playMusic();
-  }
+document.getElementById("my-bars-btn").addEventListener("click", () => {
+  document.getElementById("start-screen").classList.add("hidden");
+  document.getElementById("my-bars-screen").classList.remove("hidden");
+  loadSavedBars();
+});
+
+document.getElementById("back-home-btn").addEventListener("click", () => {
+  document.getElementById("my-bars-screen").classList.add("hidden");
+  document.getElementById("start-screen").classList.remove("hidden");
 });
